@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Condiciones</title>
+</head>
+<body>
+    <div id="app">
+        <!-- template -> lo que hace vue es utilizar como una bolsa para englobar
+        elementos pero no lo va a dibujar en pantalla. -->
+        <!-- <template v-if="mostrar"> -->
+        <!-- v-show -> lo que hace es ocultar elementos sin destruirlo a diferencia del if -->
+        <!-- un v-show no se puede utilizar con un template, dado que este el navegador no lo puede interpretar -->
+        <!-- pero si puedo utilizar con cualquier elemento de html -->
+        <!-- Su utilizacion dependera de lo que vamos hacer -->
+        <div v-show="mostrar">
+            <h1>titulo</h1>
+            <h2>subtitulo</h2>
+            <!-- v-bind:href="url" o tambien :href="url" -->
+            <a :href="url" target="_blank">Ir a {{ pagina }}</a>
+        </div>
+        <div v-show="!mostrar">
+            Esto esta oculto
+        </div>
+        <!-- </template> -->
+    </div>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script type="text/javascript">
+    // definimos primero el objeto, y de ahi sus parametros
+    let app = new Vue({
+        el : '#app',
+        data : {
+            // Dentro de data vamos a ir un objeto que va a tener clave y valor. Y todos las
+            // variables que nosotros queremos
+            nombre : 'Mundo !',
+            url : 'https://www.google.com.pe',
+            pagina : 'Google',
+            mostrar : true
+
+        }
+    })
+</script>
+</body>
+</html>

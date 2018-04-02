@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Hola mundo</title>
+</head>
+<body>
+    <div id="app">
+        Hola {{ nombre }}
+        <a v-bind:href="url" target="_blank">Ir a {{ pagina }}</a>
+    </div>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script type="text/javascript">
+    // definimos primero el objeto, y de ahi sus parametros
+    let app = new Vue({
+        el : '#app',
+        data : {
+            // Dentro de data vamos a ir un objeto que va a tener clave y valor. Y todos las
+            // variables que nosotros queremos
+            nombre : 'Mundo !',
+            url : 'https://www.google.com.pe',
+            pagina : 'Google'
+
+        }
+    })
+</script>
+</body>
+</html>

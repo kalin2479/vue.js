@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Filtros</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{ titulo | uppercase }}</h1>
+        <h2>{{ subtitulo | lowercase }}</h2>
+        <h3>{{ subtitulo | capitalize }}</h3>
+    </div>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script type="text/javascript">
+    // definimos primero el objeto, y de ahi sus parametros
+    let app = new Vue({
+        el : '#app',
+        data : {
+            titulo : 'Estas en Platzi',
+            subtitulo : 'Estas viendo el curso de Platzi'
+        },
+        filters: {
+            // Creamos un objeto, este es un objeto jSon
+            uppercase : function(str){
+                // es una funcion anonima, el cual recibe un string
+                return str.toUpperCase()
+                // return str + "kalin"
+            },
+            lowercase : function(str){
+                return str.toLowerCase()
+            },
+            capitalize : function(str){
+                console.log(4)
+                if (!str) return ''
+                str = str.toString()
+                return str.charAt(0).toUpperCase() + str.slice(1)
+            }
+        }
+    })
+</script>
+</body>
+</html>

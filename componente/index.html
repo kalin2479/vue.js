@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Componente</title>
+</head>
+<body>
+    <div id="app">
+        <form @submit.prevent="submit" action="" method="get">
+            <h2>Cuales son tus cursos favoritos?</h2>
+            <!-- Aca estamos definiendo que aparezca nuestro componente curso -->
+            <template v-for="curso in cursos">
+                <!-- Debemos pasar a este componente el parametro para ello hacemos -->
+                <curso v-bind:curso=curso v-on:checked="selectCurso"></curso>
+            </template>
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script type="text/javascript">
+    // definimos un componente, para ello le pasamos dos paramentros.
+    // El primero es el nombre de la etiqueta y el segundo es un objeto de javascript
+    Vue.component('curso',{
+        // Ah este objeto le ponemos el atributo template que va a recibir
+        // un string se escribe con comillas invertidas para utilizar el enter
+        // Debemos indicar cuales son las propiedades que va ha tener este compomente
+        // para ello utilizamos el atributo props
+        // En el atributo template se coloco un div que engloba a las etiquetas que estan dentro
+        // por que vue dice que no pueden haber dos etiquetas padres solo una y que englobe a las demas
+        props : ['curso','cursosSeleccionados'],
+        methods : {
+            onchange : function (ev){
+                // Lo que vamos a tener que ver es si el valor est chequeado o no constantemente.
+                // Para emitir un evento debemos hacer this.$emit este evento recibe varios parametros:
+                // - El primero es el nombre del evento que queremos emitir.
+                // - Despues tenemos que pasar los parametros (el valor del curso, y si elemento fue chekeado o no)
+                this.$emit('checked', this.curso.value, ev.target.checked)
+            }
+        },
+        template : `
+        <div>
+            <input type="checkbox" @change="onchange" v-bind:id="curso.value" v-bind:value="curso.value">
+            <label v-bind:for="curso.value">{{ curso.nombre }}</label>
+        </div>
+        `
+    })
+    // definimos primero el objeto, y de ahi sus parametros
+    let app = new Vue({
+        el : '#app',
+        data : {
+            nombre : '',
+            cursos : [
+                {
+                    nombre : 'Curso Vue.js',
+                    value : 'vue'
+                },
+                {
+                    nombre : 'Curso de SEO',
+                    value : 'seo'
+                },
+                {
+                    nombre : 'Curso de REACTS.js',
+                    value : 'react'
+                },
+                {
+                    nombre : 'Curso de Marketing',
+                    value : 'mark'
+                },
+                {
+                    nombre : 'Curso de Angular',
+                    value : 'ang'
+                }
+            ],
+            cursosSeleccionados : []
+        },
+        methods : {
+            submit : function(){
+                console.log("Se ejecuto!")
+                console.log(this.cursosSeleccionados)
+            },
+            selectCurso : function (curso,checked){
+                if (checked){
+                    this.cursosSeleccionados.push(curso)
+                }else{
+                    // Preguntamos cual es el indice del curso y lo hacemos de la siguiente manera
+                    let index = this.cursosSeleccionados.indexOf(curso)
+                    // a partir del index del array se quite 1 elemento
+                    this.cursosSeleccionados.splice(index, 1)
+                }
+            }
+        }
+    })
+</script>
+</body>
+</html>

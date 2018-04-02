@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Formulario</title>
+</head>
+<body>
+    <div id="app">
+        <input type="text" name="nombre" placeholder="Ingresa tu nombre" v-model="nombre">
+        <p>Tu nombre en mayuscula es : {{ nombre | uppercase }}</p>
+        <!-- v-on:submit.prevent -> esto lo que hace es indicar que el formulario
+        no haga por defecto que hace el navegador -->
+        <!-- Cuando se trata de eventos podemos escribir esto "v-on:submit.prevent"
+        de otra manera el cual es: @submit.prevent -->
+        <form @submit.prevent="submit" action="" method="get">
+            <h2>Cuales son tus cursos favoritos?</h2>
+            <input v-model="cursos" type="checkbox" id="vue" value="vue">
+            <label for="vue">Curso Vue.js</label>
+            <input v-model="cursos" type="checkbox" id="seo" value="seo">
+            <label for="seo">Curso de SEO</label>
+            <input v-model="cursos" type="checkbox" id="react" value="react">
+            <label for="react">Curso de REACTS.js</label>
+            <input v-model="cursos" type="checkbox" id="mark" value="mark">
+            <label for="mark">Curso de Marketing</label>
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script type="text/javascript">
+    // definimos primero el objeto, y de ahi sus parametros
+    let app = new Vue({
+        el : '#app',
+        data : {
+            nombre : '',
+            cursos : []
+        },
+        filters : {
+            uppercase : function(str){
+                return str.toUpperCase()
+            }
+        },
+        methods : {
+            submit : function(){
+                console.log("Se ejecuto!")
+                console.log(this.cursos)
+            }
+        }
+    })
+</script>
+</body>
+</html>

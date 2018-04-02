@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Control de Eventos</title>
+</head>
+<body>
+    <div id="app">
+        <button v-on:click="sumar">Sumar 1</button>
+        <button v-on:click="restar">Restar 1</button>
+        El contador esta en {{ contador }}
+    </div>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script type="text/javascript">
+    // definimos primero el objeto, y de ahi sus parametros
+    let app = new Vue({
+        el : '#app',
+        data : {
+            contador : 0
+        },
+        methods : {
+            sumar : function(){
+                this.contador++
+            },
+            restar : function(){
+                this.contador--
+            }
+        }
+    })
+</script>
+</body>
+</html>
